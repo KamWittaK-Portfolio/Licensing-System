@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/client/static/css/examples.css">
+    <link href="https://cdn.keyauth.cc/v2/assets/css/style.dark.bundle.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <div class="flex-container">
+        <a href="/dash">
+            <div class="flex-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key">
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                </svg>
+                <span class="item-text">Licenses</span>
+            </div>
+        </a>
+
+        <div class="flex-item1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span class="item-text">Examples</span>
+        </div>
+    </div>
+
+    <div class="big-container">
+        <div class="card mb-xl-8">
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1">App Authentication Code</span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Simply replace the example values in the code with yours</span>
+                </h3>
+
+                <div class="card-toolbar">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="C_Sharp" data-bs-toggle="tab" href="/examples/cs">C#</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="cpp" data-bs-toggle="tab" href="/examples/cpp">C++</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="python" data-bs-toggle="tab" href="/examples/py">Python</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="JavaScript" data-bs-toggle="tab" href="/examples/js">JavaScript</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="Lua" data-bs-toggle="tab" href="/examples/lua">Lua</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-container">
+        <div id="editor">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;curl/curl.h&gt;
+#include &lt;json/json.h&gt; // Make sure to include a JSON library, like jsoncpp
+
+const std::string URL = "http://localhost:5001/auth";
+const std::string LICENSE = "8APD1AJ80MIIT1DL";
+
+std::pair&lt;std::string, bool&gt; auth() {
+    CURL* curl;
+    CURLcode res;
+    std::string readBuffer;
+    bool authStatus = false;
+    std::string authMessage;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+        Json::Value data;
+        data["license"] = LICENSE;
+        Json::StreamWriterBuilder writer;
+        std::string jsonData = Json::writeString(writer, data);
+
+        curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonData.c_str());
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, curl_slist_append(NULL, "Content-Type: application/json"));
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &amp;readBuffer);
+
+        res = curl_easy_perform(curl);
+
+        if (res != CURLE_OK) {
+            authMessage = "An error occurred: " + std::string(curl_easy_strerror(res));
+            authStatus = false;
+        } else {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &amp;response_code);
+
+            if (response_code == 200) {
+                authMessage = "You are authenticated to use this code";
+                authStatus = true;
+            } else if (response_code == 201) {
+                authMessage = "Your time has run out";
+                authStatus = false;
+            } else {
+                authMessage = "Unexpected response. Ask the owner for access to use this code.";
+                authStatus = false;
+            }
+        }
+
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return {authMessage, authStatus};
+}
+
+int main() {
+    auto [authMessage, authStatus] = auth();
+    if (!authStatus) {
+        std::cout &lt;&lt; authMessage &lt;&lt; std::endl;
+        return 0;
+    }
+
+    // Rest of Code
+    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+    return 0;
+}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js"></script>
+    <script src="{{ url_for('static', filename='examples_cpp.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('serve_static', path='css/examples.css') }}">
+</body>
+</html>

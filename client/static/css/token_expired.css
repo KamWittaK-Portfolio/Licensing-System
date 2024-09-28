@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(21, 21, 33);
+    margin: 0;
+}
+
+body h1,
+body p,
+.centered-link {
+    color: white;
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}

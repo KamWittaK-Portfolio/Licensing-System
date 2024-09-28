@@ -1,0 +1,125 @@
+body {
+    background-color: rgb(21, 21, 33);
+    margin: 0;
+}
+
+.flex-container {
+    background-color: rgb(30, 30, 45);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 15vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+  
+.flex-container > div {
+    padding-left: 12%;
+    text-align: left;
+    line-height: 50px;
+    font-size: 15px;
+    width: 14vh;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.flex-item svg,
+.flex-item1 svg {
+    padding-right: 10px;
+    color: white;
+}
+
+.flex-container > div:hover {
+    background-color: rgb(21, 21, 33);
+    cursor: pointer;
+}
+
+.flex-item1 {
+    background-color: rgb(21, 21, 33);
+}
+
+.flex-container a {
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 12%;
+    text-align: left;
+    line-height: 50px;
+    font-size: 15px;
+    width: 13vh;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.flex-container a:hover {
+    background-color: rgb(21, 21, 33);
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 4%;
+}
+
+table {
+    border-collapse: collapse;
+    width: calc(100vw - 15vh);
+    margin-left: 15vh;
+    z-index: 1;
+}
+
+th, td {
+    border: 1px solid rgb(34, 33, 33);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: rgb(21, 21, 33);
+    color: rgb(202, 201, 201);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+tr {
+    background-color: rgb(21, 21, 33);
+    color: rgb(137, 130, 130);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgb(21, 21, 33);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgb(25, 25, 39);
+}
+
+.lic-buttons{
+    position: absolute;
+    left: 15vh;
+    z-index: 11;
+    display: flex;
+    padding: 7px;
+    gap: 4px;
+}
+
+.lic-buttons button,
+.rem-buttons button {
+    color: white;
+    background-color: rgb(49, 143, 237);
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+.lic-buttons button:hover,
+.rem-buttons button:hover {
+    cursor: pointer;
+    background-color: rgb(11, 105, 199);
+}
+
+.lic-buttons svg,
+.rem-buttons svg {
+    padding-right: 6px;
+    color: white;
+}

@@ -1,0 +1,136 @@
+.editor-container {
+    width: 1500px; /* Keep as needed */
+    height: 940px; /* Keep as needed */
+    margin-left: 25%;
+    margin-top: 8%;
+    position: relative; /* Change position to relative for better layout control */
+    z-index: 1;
+}
+
+#editor {
+    height: 100%; /* Full height */
+    width: 100%; /* Full width */
+    border: none; /* Remove any border */
+    z-index: 1;
+}
+
+body {
+    background-color: rgb(21, 21, 33);
+    margin: 0; /* Remove default margin */
+}
+
+
+.flex-container {
+    background-color: rgb(30, 30, 45);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 15vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.flex-container > div {
+    width: 100px;
+    padding-left: 12%;
+    text-align: left;
+    line-height: 50px;
+    font-size: 15px;
+    width: 15vh;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.flex-item svgs,
+.flex-item1 svgs {
+    padding-right: 10px;
+    color: white;
+}
+
+.flex-container > div:hover {
+    background-color: rgb(21, 21, 33);
+    cursor: pointer;
+}
+
+.flex-item1 {
+    background-color: rgb(21, 21, 33);
+}
+
+
+.flex-container a {
+    text-decoration: none;
+    cursor: pointer;
+    width: 100px;
+    padding-left: 12%;
+    text-align: left;
+    line-height: 50px;
+    font-size: 15px;
+    width: 15vh;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+    .flex-container a:hover {
+        background-color: rgb(21, 21, 33);
+    }
+
+
+.big-container {
+    background-color: rgb(30, 30, 45);
+    display: flex;
+    flex-direction: column;
+    height: 7.9vh;
+    width: 93%;
+    position: fixed;
+    top: 0;
+    left: 15vh;
+}
+
+
+.card-toolbar {
+    position: relative;
+    align-items: left;
+    right: 5%;
+    overflow-x: scroll;
+}
+
+@media (max-width: 1235px) {
+    .card-toolbar {
+        left: 2px;
+    }
+}
+
+
+.nav {
+    max-width: fit-content;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.nav-item a {
+    color: white;
+}
+
+.nav-item a.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.gray-box {
+    background-color: rgb(43, 43, 64);
+    width: 100%;
+    height: fit-content;
+    padding: 15px;
+    align-items: center;
+}
+
+
+.tab-content {
+    display: none;
+    color: purple;
+    white-space: pre;
+}

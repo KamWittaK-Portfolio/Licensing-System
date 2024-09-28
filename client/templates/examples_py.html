@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/client/static/css/examples.css">
+    <link href="https://cdn.keyauth.cc/v2/assets/css/style.dark.bundle.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <div class="flex-container">
+        <a href="/dash">
+            <div class="flex-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key">
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                </svg>
+                <span class="item-text">Licenses</span>
+            </div>
+        </a>
+
+        <div class="flex-item1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span class="item-text">Examples</span>
+        </div>
+    </div>
+
+    <div class="big-container">
+        <div class="card mb-xl-8">
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1">App Authentication Code</span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Simply replace the example values in the code with yours</span>
+                </h3>
+
+                <div class="card-toolbar">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="C_Sharp" data-bs-toggle="tab" href="/examples/cs">C#</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="cpp" data-bs-toggle="tab" href="/examples/cpp">C++</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="python" data-bs-toggle="tab" href="/examples/py">Python</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="JavaScript" data-bs-toggle="tab" href="/examples/js">JavaScript</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="Lua" data-bs-toggle="tab" href="/examples/lua">Lua</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-container">
+        <div id="editor">import requests
+
+URL = "http://localhost:5001/auth"
+LICENSE = "8APD1AJ80MIIT1DL"
+
+def auth():
+    data = {
+        "license": LICENSE
+    }
+
+    try:
+        response = requests.post(url=URL, json=data)
+        response.raise_for_status()
+
+        if response.status_code == 200:
+            return "You are authenticated to use this code", True
+        elif response.status_code == 201:
+            return "Your time has run out", False
+    else:
+        return "Unexpected response. Ask the owner for access to use this code.", False
+
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}", False
+
+def main():
+    authMessage, authStatus = auth()
+    if not authStatus:
+        print(authMessage)
+        return
+
+    # Rest of Code
+    print("Hello World")
+
+
+if __name__ == "__main__":
+    main()
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.5.3/ace.js"></script>
+    <script src="{{ url_for('static', filename='examples_py.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('serve_static', path='css/examples.css') }}">
+</body>
+</html>
